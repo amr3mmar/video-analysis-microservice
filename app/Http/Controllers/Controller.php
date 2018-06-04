@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+use App\Http\Requests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -19,22 +21,16 @@ class Controller extends BaseController
      *                    like gs://bucketname/objectname
      */
 
-     public function FunctionName()
-     {
-         # code...
-         return "hi";
-     }
-    function analyze_labels()
+    function analyzeLabels(Request $request)
     {
-        error_log("hi");
         # Instantiate a client.
         $video = new VideoIntelligenceServiceClient();
 
-
-        $uri = '/home/amr3mmar/Desktop/videoplayback.mp4';
+        # $path = '/home/amr3mmar/Desktop/videoplayback.mp4';
+        $path = $request->get('path');
 
         # Read the local video file
-        $inputContent = file_get_contents($uri);
+        $inputContent = file_get_contents($path);
 
         # Execute a request.
         $operation = $video->annotateVideo([

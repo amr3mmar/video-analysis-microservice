@@ -17,4 +17,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('test2', 'Controller@analyze_labels')->name('test2');
+Route::post('analyze', 'Controller@analyzeLabels');
